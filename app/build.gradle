@@ -32,6 +32,15 @@ android {
         jvmTarget = '1.8'
 //        freeCompilerArgs = ['-Xjvm-default=compatibility']
     }
+
+    sourceSets {
+        androidTest {
+            java.srcDirs += "src/sharedTest/java"
+        }
+        test {
+            java.srcDirs += "src/sharedTest/java"
+        }
+    }
 }
 
 dependencies {
