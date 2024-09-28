@@ -14,10 +14,15 @@ class MainViewModel(private val repository: ProductRepository) : ViewModel() {
     val products : LiveData<NetworkResult<List<ProductListItem>>>
         get() = _products
 
+    init {
+        getProducts()
+    }
+
     fun getProducts() {
         viewModelScope.launch {
+            _products.postValue(NetworkResult.Loading())
             val result = repository.getProducts()
-            _products.postValue(result  )
+            _products.postValue(result)
         }
     }
 }

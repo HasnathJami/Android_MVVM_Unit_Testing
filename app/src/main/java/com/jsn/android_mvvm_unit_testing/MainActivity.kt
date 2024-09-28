@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +29,10 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.products.observe(this@MainActivity) {
             when (it) {
+                is NetworkResult.Loading -> {
+                    Toast.makeText(this@MainActivity, "Loading", Toast.LENGTH_LONG).show()
+                }
+
                 is NetworkResult.Success -> {
                     Log.d("CheckTest1", it.data.toString())
                     adapter = ProductAdapter(it.data!!)
@@ -38,9 +41,6 @@ class MainActivity : AppCompatActivity() {
 
                 is NetworkResult.Error -> {
                     Toast.makeText(this@MainActivity, "Error Occurred", Toast.LENGTH_LONG).show()
-                }
-                is NetworkResult.Loading -> {
-                    Toast.makeText(this@MainActivity, "Loading", Toast.LENGTH_LONG).show()
                 }
             }
         }

@@ -15,13 +15,13 @@ class ProductAdapter(private val productList: List<ProductListItem>) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ProductAdapter.ProductViewHolder {
+    ): ProductViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.product_item_layout, parent, false)
         return ProductViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ProductAdapter.ProductViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList.getOrNull(index = position)
         holder.name.text = product?.title
         Glide.with(holder.image.context).load(product?.image).into(holder.image)
